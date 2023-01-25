@@ -1,4 +1,4 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import React from "react";
 
 export default function index() {
@@ -9,11 +9,12 @@ export default function index() {
   );
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   return {
     redirect: {
       destination: "/characters/1",
       permanent: false,
     },
+    props: {},
   };
 };
