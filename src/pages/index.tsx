@@ -6,7 +6,8 @@ export default function Home() {
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    fetch("https://rickandmortyapi.com/api")
+      console.log("Hello World");
+      fetch("https://rickandmortyapi.com/api")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
@@ -17,7 +18,7 @@ export default function Home() {
         <title>Rick and Morty Test</title>
       </Head>
       <main>
-        <h1>Rick and Morty Test</h1>
+          <h1>Rick and Morty Test</h1>
         {data && (
           <ul>
             {Object.keys(data).map((key) => (
