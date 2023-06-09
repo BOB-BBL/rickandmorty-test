@@ -11,6 +11,7 @@ const Character: React.FC<ICharacterProps> = (props) => {
         width: "25rem",
         height: "25rem",
         backgroundColor: props.color,
+        transition: "all easeInElastic 2s",
         marginRight: "60px" ,
         marginTop: "30px",
         boxShadow: "-1px 3px 4px",

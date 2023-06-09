@@ -28,6 +28,13 @@ const Characters: NextPage<ICharactersProps> = ({ data }) => {
   ||character.id.toString().toLowerCase().includes(value.toLowerCase())
   ||character.status.toLowerCase().includes(value.toLowerCase())
   ||character.species.toLowerCase().includes(value.toLowerCase()))
+  const [sort, setSort]=useState("")
+  const sorted=filterthedata.sort(function(a,b){
+    if(sort==="alfabetisk"){
+    return a.name.localeCompare(b.name)
+    }
+  else{return a.id-b.id}})
+
   
   return (
     <div>
@@ -40,6 +47,10 @@ const Characters: NextPage<ICharactersProps> = ({ data }) => {
       <button onClick={()=> setColor("#ff4d4d")}>red</button>
       <button onClick={()=> setColor("lightBlue")}>lightBlue</button>
       <button onClick={()=> setColor("lightGreen")}>green</button>
+      <div>
+        <button onClick={function() {setSort("alfabetisk")}}>Sort by name</button>
+        <button onClick={function() {setSort("id")}}>Sort by Id</button>
+      </div>
       </div>
       </div> 
       <div>
@@ -51,7 +62,7 @@ const Characters: NextPage<ICharactersProps> = ({ data }) => {
               flexWrap: "wrap",
             }}
           >
-            {filterthedata.map((character: any) => (
+            {sorted.map((character: any) => (
               <Character {...character} key={character.id} color={color} />
             ))}
           </ul>
