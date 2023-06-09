@@ -1,18 +1,47 @@
 import Info from "@/components/characters/Info";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Character from "@/components/characters/Character";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { log } from "console";
 
 interface ICharactersProps {
-  data: any;
+  data: {
+    results:{
+    id:number,
+    name: string,
+    status: string,
+    species: string,
+  
+  }[], info:any}
 }
 
 const Characters: NextPage<ICharactersProps> = ({ data }) => {
+  const [color, setColor]=useState("lightGreen");
+  const [value, setValue]=useState("")
+  const [valueid, setValueid]=useState("")
+  const [valuestatus, setValuestatus]=useState("")
+  const [valuespecies, setValuespecies]=useState("")
+  console.log("INPUT", value);
+  const filterthedata=data.results.filter((character)=> 
+  character.name.toLowerCase().includes(value.toLowerCase())
+  ||character.id.toString().toLowerCase().includes(value.toLowerCase())
+  ||character.status.toLowerCase().includes(value.toLowerCase())
+  ||character.species.toLowerCase().includes(value.toLowerCase()))
+  
   return (
     <div>
       <Link href="/">Home</Link>
       <h1>Characters</h1>
+      <div style={{display:"flex",flexDirection:"column"}}>
+        <p>Search</p>
+      <input value={value}onChange={(event)=> setValue(event.target.value)}></input>
+      <div>
+      <button onClick={()=> setColor("#ff4d4d")}>red</button>
+      <button onClick={()=> setColor("lightBlue")}>lightBlue</button>
+      <button onClick={()=> setColor("lightGreen")}>green</button>
+      </div>
+      </div> 
       <div>
         {data ? <Info {...data.info} /> : <p>Loading...</p>}
         {data && (
@@ -22,8 +51,8 @@ const Characters: NextPage<ICharactersProps> = ({ data }) => {
               flexWrap: "wrap",
             }}
           >
-            {data.results.map((character: any) => (
-              <Character {...character} key={character.id} />
+            {filterthedata.map((character: any) => (
+              <Character {...character} key={character.id} color={color} />
             ))}
           </ul>
         )}
