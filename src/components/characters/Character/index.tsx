@@ -10,7 +10,7 @@ const Character: React.FC<ICharacterProps> = (props) => {
         display: "block",
         width: "25rem",
         height: "25rem",
-        backgroundColor: "lightgreen",
+        backgroundColor: props.color,
         marginRight: "60px" ,
         marginTop: "30px",
         boxShadow: "-1px 3px 4px",

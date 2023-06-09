@@ -1,5 +1,6 @@
 export interface ICharacterProps {
   created: string;
+  color: string;
   episode: string[];
   gender: string;
   id: number;
