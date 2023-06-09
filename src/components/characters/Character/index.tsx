@@ -8,7 +8,7 @@ const Character: React.FC<ICharacterProps> = (props) => {
     <div
       style={{
         display: "block",
-        width: "24rem",
+        width: "25rem",
         height: "25rem",
         backgroundColor: "lightgreen",
         marginRight: "60px" ,
