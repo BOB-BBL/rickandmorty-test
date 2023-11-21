@@ -1,7 +1,7 @@
-import Info from "@/components/characters/Info";
+import Info from "@/components/Info";
 import Link from "next/link";
-import React, { useState } from "react";
-import Character from "@/components/characters/Character";
+import React from "react";
+import Character from "@/components/Character";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 interface ICharactersProps {
@@ -17,58 +17,13 @@ interface ICharactersProps {
 }
 
 const Characters: NextPage<ICharactersProps> = ({ data }) => {
-  const [color, setColor] = useState("lightGreen");
-  const [value, setValue] = useState("");
-  const [valueid, setValueid] = useState("");
-  const [valuestatus, setValuestatus] = useState("");
-  const [valuespecies, setValuespecies] = useState("");
-  const filterthedata = data.results.filter(
-    (character) =>
-      character.name.toLowerCase().includes(value.toLowerCase()) ||
-      character.id.toString().toLowerCase().includes(value.toLowerCase()) ||
-      character.status.toLowerCase().includes(value.toLowerCase()) ||
-      character.species.toLowerCase().includes(value.toLowerCase())
-  );
-  const [sort, setSort] = useState("");
-  const sorted = filterthedata.sort(function (a, b) {
-    if (sort === "alfabetisk") {
-      return a.name.localeCompare(b.name);
-    } else {
-      return a.id - b.id;
-    }
-  });
-
   return (
     <div>
       <Link href="/">Home</Link>
       <h1>Characters</h1>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <p>Search</p>
-        <input
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-        ></input>
-        <div>
-          <button onClick={() => setColor("#ff4d4d")}>red</button>
-          <button onClick={() => setColor("lightBlue")}>lightBlue</button>
-          <button onClick={() => setColor("lightGreen")}>green</button>
-          <div>
-            <button
-              onClick={function () {
-                setSort("alfabetisk");
-              }}
-            >
-              Sort by name
-            </button>
-            <button
-              onClick={function () {
-                setSort("id");
-              }}
-            >
-              Sort by Id
-            </button>
-          </div>
-        </div>
+        <input type="text" />
       </div>
       <div>
         {data ? <Info {...data.info} /> : <p>Loading...</p>}
@@ -79,8 +34,8 @@ const Characters: NextPage<ICharactersProps> = ({ data }) => {
               flexWrap: "wrap",
             }}
           >
-            {sorted.map((character: any) => (
-              <Character {...character} key={character.id} color={color} />
+            {data?.results?.map((character: any) => (
+              <Character {...character} key={character.id} />
             ))}
           </ul>
         )}
