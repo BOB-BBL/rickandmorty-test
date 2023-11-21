@@ -4,10 +4,8 @@ import React from "react";
 
 export default function Home() {
   const [data, setData] = React.useState(null);
-  console.log("🚀 ~ file: index.tsx:8 ~ Home ~ data:", data);
 
   React.useEffect(() => {
-    console.log("Hello World");
     fetch("https://rickandmortyapi.com/api")
       .then((res) => res.json())
       .then((data) => setData(data));
